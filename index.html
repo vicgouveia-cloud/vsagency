@@ -299,13 +299,20 @@
             top: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: #10b981;
-            color: white;
             padding: 16px 32px;
             border-radius: 6px;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             z-index: 1000;
             font-weight: 600;
+            color: white;
+        }
+        
+        .msg-box.success {
+            background-color: #10b981;
+        }
+        
+        .msg-box.error {
+            background-color: #ef4444;
         }
 
         @media (max-width: 600px) {
@@ -323,10 +330,16 @@
 </head>
 <body>
 
-    <div id="messageBox" class="msg-box">Form successfully simulated! Ready to connect to an onboarding database.</div>
+    <div id="messageBox" class="msg-box"></div>
 
     <div class="form-container">
-        <form id="intakeForm" onsubmit="handleSubmit(event)">
+        <!-- Form submission targets Formspree with your validated target email endpoint -->
+        <form id="intakeForm" action="https://formspree.io" method="POST" enctype="multipart/form-data">
+            
+            <!-- Hidden input to supply your explicit routing target inside Formspree context -->
+            <input type="hidden" name="_to" value="victor_skt08@yahoo.co.uk">
+            <!-- Hidden input configuration telling Formspree to automatically offer confirmation emails to actors -->
+            <input type="hidden" name="_subject" value="New Talent Intake Submission Received">
             
             <div class="header">
                 <h1>Talent Agency - New Client Intake Form</h1>
@@ -339,27 +352,28 @@
                 <div class="grid-2">
                     <div class="form-group">
                         <label for="stageName">Stage Name</label>
-                        <input type="text" id="stageName" name="stageName" placeholder="e.g., Jane Doe">
+                        <input type="text" id="stageName" name="Stage Name" placeholder="e.g., Jane Doe">
                     </div>
                     <div class="form-group">
                         <label for="legalName">Legal Name (for contracts)</label>
-                        <input type="text" id="legalName" name="legalName" required>
+                        <input type="text" id="legalName" name="Legal Name" required>
                     </div>
                     <div class="form-group">
-                        <label for="dob">Date of Birth</label>
-                        <input type="date" id="dob" name="dob" required>
+                        <label for="dob">Date of Birth (MM/DD/YYYY)</label>
+                        <input type="text" id="dob" name="Date of Birth" placeholder="MM/DD/YYYY" required pattern="(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/[0-9]{4}" title="Please enter a valid date in MM/DD/YYYY format">
                     </div>
                     <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555" required>
+                        <label for="phone">Phone Number (e.g., 123-456-7890)</label>
+                        <input type="tel" id="phone" name="Phone Number" placeholder="123-456-7890" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="Please enter a 10-digit phone number using the format: 123-456-7890">
                     </div>
                     <div class="form-group full-width">
                         <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" required>
+                        <!-- Formspree natively scans name="_replyto" or name="email" to target its automatic client auto-responders -->
+                        <input type="email" id="email" name="_replyto" placeholder="actor-email@domain.com" required>
                     </div>
                     <div class="form-group full-width">
                         <label for="address">Current Home Address</label>
-                        <input type="text" id="address" name="address" required>
+                        <input type="text" id="address" name="Current Home Address" required>
                     </div>
                 </div>
 
@@ -367,15 +381,15 @@
                 <div class="grid-3" style="margin-top: 16px; padding-top: 16px; border-top: 1px dashed var(--border);">
                     <div class="form-group">
                         <label for="emergencyName">Emergency Contact Name</label>
-                        <input type="text" id="emergencyName" name="emergencyName">
+                        <input type="text" id="emergencyName" name="Emergency Contact Name">
                     </div>
                     <div class="form-group">
                         <label for="emergencyRelationship">Relationship</label>
-                        <input type="text" id="emergencyRelationship" name="emergencyRelationship">
+                        <input type="text" id="emergencyRelationship" name="Emergency Relationship">
                     </div>
                     <div class="form-group">
                         <label for="emergencyPhone">Emergency Phone</label>
-                        <input type="tel" id="emergencyPhone" name="emergencyPhone">
+                        <input type="tel" id="emergencyPhone" name="Emergency Phone" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="Please enter a 10-digit phone number using the format: 123-456-7890">
                     </div>
                 </div>
             </div>
@@ -387,13 +401,13 @@
                     <label>Union Memberships</label>
                     <div class="checkbox-group">
                         <label class="checkbox-label">
-                            <input type="checkbox" name="union" value="SAG-AFTRA" onchange="toggleUnionId('sagId', this)"> SAG-AFTRA
+                            <input type="checkbox" name="Union Memberships[]" value="SAG-AFTRA" onchange="toggleUnionId('sagId', this)"> SAG-AFTRA
                         </label>
                         <label class="checkbox-label">
-                            <input type="checkbox" name="union" value="AEA" onchange="toggleUnionId('aeaId', this)"> AEA
+                            <input type="checkbox" name="Union Memberships[]" value="AEA" onchange="toggleUnionId('aeaId', this)"> AEA
                         </label>
                         <label class="checkbox-label">
-                            <input type="checkbox" name="union" value="Non-Union"> Non-Union
+                            <input type="checkbox" name="Union Memberships[]" value="Non-Union"> Non-Union
                         </label>
                     </div>
                 </div>
@@ -401,22 +415,22 @@
                 <div class="grid-2">
                     <div class="form-group">
                         <label for="sagId">SAG-AFTRA ID #</label>
-                        <input type="text" id="sagId" name="sagId" disabled placeholder="Check box to enable">
+                        <input type="text" id="sagId" name="SAG-AFTRA ID" disabled placeholder="Check box to enable">
                     </div>
                     <div class="form-group">
-                        <label for="aeaId">AEA ID #</label>
-                        <input type="text" id="aeaId" name="aeaId" disabled placeholder="Check box to enable">
+                        <label fragile for="aeaId">AEA ID #</label>
+                        <input type="text" id="aeaId" name="AEA ID" disabled placeholder="Check box to enable">
                     </div>
                     <div class="form-group">
                         <label>Valid Passport?</label>
                         <div class="checkbox-group">
-                            <label class="checkbox-label"><input type="radio" name="passport" value="Yes"> Yes</label>
-                            <label class="checkbox-label"><input type="radio" name="passport" value="No"> No</label>
+                            <label class="checkbox-label"><input type="radio" name="Has Valid Passport" value="Yes"> Yes</label>
+                            <label class="checkbox-label"><input type="radio" name="Has Valid Passport" value="No"> No</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="citizenship">Citizenship / Work Authorization</label>
-                        <input type="text" id="citizenship" name="citizenship">
+                        <input type="text" id="citizenship" name="Citizenship / Work Auth">
                     </div>
                 </div>
             </div>
@@ -427,39 +441,39 @@
                 <div class="grid-4">
                     <div class="form-group">
                         <label for="height">Height</label>
-                        <input type="text" id="height" name="height">
+                        <input type="text" id="height" name="Height">
                     </div>
                     <div class="form-group">
                         <label for="eyeColor">Eye Color</label>
-                        <input type="text" id="eyeColor" name="eyeColor">
+                        <input type="text" id="eyeColor" name="Eye Color">
                     </div>
                     <div class="form-group">
                         <label for="hairColor">Hair Color</label>
-                        <input type="text" id="hairColor" name="hairColor">
+                        <input type="text" id="hairColor" name="Hair Color">
                     </div>
                     <div class="form-group">
                         <label for="hairLength">Hair Length</label>
-                        <input type="text" id="hairLength" name="hairLength">
+                        <input type="text" id="hairLength" name="Hair Length">
                     </div>
                     <div class="form-group">
                         <label for="shirtSize">Shirt/Top Size</label>
-                        <input type="text" id="shirtSize" name="shirtSize">
+                        <input type="text" id="shirtSize" name="Shirt/Top Size">
                     </div>
                     <div class="form-group">
                         <label for="pantSize">Pant/Bottom Size</label>
-                        <input type="text" id="pantSize" name="pantSize">
+                        <input type="text" id="pantSize" name="Pant/Bottom Size">
                     </div>
                     <div class="form-group">
                         <label for="dressSize">Dress Size</label>
-                        <input type="text" id="dressSize" name="dressSize">
+                        <input type="text" id="dressSize" name="Dress Size">
                     </div>
                     <div class="form-group">
                         <label for="shoeSize">Shoe Size</label>
-                        <input type="text" id="shoeSize" name="shoeSize">
+                        <input type="text" id="shoeSize" name="Shoe Size">
                     </div>
                     <div class="form-group span-4">
                         <label for="tattoos">Visible Tattoos / Piercings</label>
-                        <input type="text" id="tattoos" name="tattoos" placeholder="Describe locations and sizes if applicable">
+                        <input type="text" id="tattoos" name="Visible Tattoos or Piercings" placeholder="Describe locations and sizes if applicable">
                     </div>
                 </div>
             </div>
@@ -471,24 +485,24 @@
                     <div class="form-group">
                         <label>Willing to travel for work?</label>
                         <div class="checkbox-group">
-                            <label class="checkbox-label"><input type="radio" name="travel" value="Yes"> Yes</label>
-                            <label class="checkbox-label"><input type="radio" name="travel" value="No"> No</label>
+                            <label class="checkbox-label"><input type="radio" name="Willing to Travel" value="Yes"> Yes</label>
+                            <label class="checkbox-label"><input type="radio" name="Willing to Travel" value="No"> No</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Own a reliable vehicle?</label>
                         <div class="checkbox-group">
-                            <label class="checkbox-label"><input type="radio" name="vehicle" value="Yes"> Yes</label>
-                            <label class="checkbox-label"><input type="radio" name="vehicle" value="No"> No</label>
+                            <label class="checkbox-label"><input type="radio" name="Owns Reliable Vehicle" value="Yes"> Yes</label>
+                            <label class="checkbox-label"><input type="radio" name="Owns Reliable Vehicle" value="No"> No</label>
                         </div>
                     </div>
                     <div class="form-group full-width">
                         <label for="lodging">Local lodging options in other cities?</label>
-                        <input type="text" id="lodging" name="lodging" placeholder="e.g., Los Angeles, Atlanta, New York">
+                        <input type="text" id="lodging" name="Local Lodging in Other Cities" placeholder="e.g., Los Angeles, Atlanta, New York">
                     </div>
                     <div class="form-group full-width">
                         <label for="conflicts">Schedule conflicts / Blackout dates</label>
-                        <input type="text" id="conflicts" name="conflicts">
+                        <input type="text" id="conflicts" name="Schedule Conflicts / Blackout Dates">
                     </div>
                 </div>
             </div>
@@ -498,23 +512,23 @@
                 <div class="section-title">5. Special Skills & Comfort Levels</div>
                 <div class="form-group">
                     <label for="accents">Accents / Dialects</label>
-                    <input type="text" id="accents" name="accents">
+                    <input type="text" id="accents" name="Accents and Dialects">
                 </div>
                 <div class="form-group">
                     <label for="languages">Languages Spoken & Fluency</label>
-                    <input type="text" id="languages" name="languages">
+                    <input type="text" id="languages" name="Languages Spoken & Fluency">
                 </div>
                 <div class="form-group">
                     <label for="performanceSkills">Performance Skills (Sing/Dance/Combat)</label>
-                    <textarea id="performanceSkills" name="performanceSkills"></textarea>
+                    <textarea id="performanceSkills" name="Performance Skills"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="athleticSkills">Athletic Skills (Sports/Stunts)</label>
-                    <textarea id="athleticSkills" name="athleticSkills"></textarea>
+                    <textarea id="athleticSkills" name="Athletic Skills"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="restrictions">Work Restrictions / Comfort Boundaries</label>
-                    <textarea id="restrictions" name="restrictions"></textarea>
+                    <textarea id="restrictions" name="Work Restrictions and Boundaries"></textarea>
                 </div>
             </div>
 
@@ -527,7 +541,7 @@
                         <div class="upload-zone" id="headshotZone">
                             <span class="upload-icon">📷</span>
                             <span class="upload-text">Drag & drop headshot here or click to choose file</span>
-                            <input type="file" id="headshotFile" name="headshotFile" accept="image/jpeg, image/png" onchange="handleFileChange(this, 'headshotInfo')">
+                            <input type="file" id="headshotFile" name="Attached Headshot File" accept="image/jpeg, image/png" onchange="handleFileChange(this, 'headshotInfo')">
                             <div class="file-info" id="headshotInfo"></div>
                         </div>
                     </div>
@@ -536,7 +550,7 @@
                         <div class="upload-zone" id="resumeZone">
                             <span class="upload-icon">📄</span>
                             <span class="upload-text">Drag & drop resume here or click to choose file</span>
-                            <input type="file" id="resumeFile" name="resumeFile" accept="application/pdf" onchange="handleFileChange(this, 'resumeInfo')">
+                            <input type="file" id="resumeFile" name="Attached Resume File" accept="application/pdf" onchange="handleFileChange(this, 'resumeInfo')">
                             <div class="file-info" id="resumeInfo"></div>
                         </div>
                     </div>
@@ -549,28 +563,28 @@
                 <div class="grid-2">
                     <div class="form-group">
                         <label for="reel">Link to Acting Reel</label>
-                        <input type="text" id="reel" name="reel" placeholder="https://vimeo.com...">
+                        <input type="text" id="reel" name="Acting Reel Link" placeholder="https://vimeo.com...">
                     </div>
                     <div class="form-group">
                         <label for="portfolio">Online Portfolio (Actors Access, etc.)</label>
-                        <input type="text" id="portfolio" name="portfolio">
+                        <input type="text" id="portfolio" name="Online Portfolio Link">
                     </div>
                     <div class="form-group">
                         <label for="imdb">IMDb Profile Link</label>
-                        <input type="text" id="imdb" name="imdb">
+                        <input type="text" id="imdb" name="IMDb Profile Link">
                     </div>
                     <div class="form-group">
                         <label for="instagram">Instagram Handle</label>
-                        <input type="text" id="instagram" name="instagram" placeholder="@username">
+                        <input type="text" id="instagram" name="Instagram Handle" placeholder="@username">
                     </div>
                     <div class="form-group full-width">
                         <label for="socialOther">Other Social Platforms (TikTok, YouTube, etc.)</label>
-                        <input type="text" id="socialOther" name="socialOther">
+                        <input type="text" id="socialOther" name="Other Social Profiles">
                     </div>
                 </div>
             </div>
 
-            <!-- NEW! 8. DIGITAL AUTHORIZATION SIGNATURE -->
+            <!-- 8. DIGITAL AUTHORIZATION SIGNATURE -->
             <div class="section">
                 <div class="section-title">8. Authorization & Digital Signature</div>
                 <div class="form-group">
@@ -581,6 +595,8 @@
                             <button type="button" class="btn-clear" onclick="clearSignature()">Clear Signature</button>
                         </div>
                     </div>
+                    <!-- Hidden element to capture the signature data as an image string for the email -->
+                    <input type="hidden" id="signatureData" name="Digital Signature Image Data">
                 </div>
             </div>
 
@@ -640,8 +656,8 @@
         const canvas = document.getElementById('signaturePad');
         const ctx = canvas.getContext('2d');
         let isDrawing = false;
+        let signatureInteracted = false;
 
-        // Correct for HDPI display resolution rendering issues
         function resizeCanvas() {
             const rect = canvas.getBoundingClientRect();
             canvas.width = rect.width;
@@ -651,11 +667,9 @@
             ctx.lineCap = 'round';
         }
 
-        // Initialize canvas sizing after DOM calculations
         window.addEventListener('load', resizeCanvas);
         window.addEventListener('resize', resizeCanvas);
 
-        // Track standard mouse positions
         function getMousePos(e) {
             const rect = canvas.getBoundingClientRect();
             return {
@@ -664,9 +678,9 @@
             };
         }
 
-        // Drawing Event Hooks
         function startDrawing(e) {
             isDrawing = true;
+            signatureInteracted = true;
             const pos = getMousePos(e);
             ctx.beginPath();
             ctx.moveTo(pos.x, pos.y);
@@ -695,19 +709,61 @@
 
         function clearSignature() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+            signatureInteracted = false;
+            document.getElementById('signatureData').value = "";
         }
 
-        function handleSubmit(event) {
+        // Handle structural async submission dispatch via AJAX to keep clients on-page
+        const form = document.getElementById('intakeForm');
+        form.addEventListener('submit', function(event) {
             event.preventDefault();
             
-            // Display submission message window
             const msgBox = document.getElementById('messageBox');
-            msgBox.style.display = 'block';
             
-            setTimeout(() => {
-                msgBox.style.display = 'none';
-            }, 4000);
-        }
+            // Map the current visual sketch signature to data text inside the hidden input before delivery
+            if (signatureInteracted) {
+                document.getElementById('signatureData').value = canvas.toDataURL();
+            }
+
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+                method: form.method,
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    msgBox.textContent = "Thank you! Your intake form has been submitted and sent to the agency.";
+                    msgBox.className = "msg-box success";
+                    msgBox.style.display = 'block';
+                    form.reset();
+                    clearSignature();
+                } else {
+                    response.json().then(data => {
+                        if (Object.prototype.hasOwnProperty.call(data, 'errors')) {
+                            msgBox.textContent = data['errors'].map(error => error.message).join(', ');
+                        } else {
+                            msgBox.textContent = "Oops! System encountered a problem sending your form.";
+                        }
+                        msgBox.className = "msg-box error";
+                        msgBox.style.display = 'block';
+                    });
+                }
+            })
+            .catch(() => {
+                msgBox.textContent = "Oops! Unable to connect to the email server. Please check your network connection.";
+                msgBox.className = "msg-box error";
+                msgBox.style.display = 'block';
+            })
+            .finally(() => {
+                setTimeout(() => {
+                    msgBox.style.display = 'none';
+                }, 5000);
+            });
+        });
     </script>
 </body>
 </html>
