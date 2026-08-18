@@ -1,3 +1,5 @@
+# Fillable Online Talent Intake Form
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +19,7 @@
         }
 
         * {
+
             box-sizing: border-box;
             margin: 0;
             padding: 0;
@@ -36,6 +39,7 @@
             background: var(--card-bg);
             border-radius: 8px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
             overflow: hidden;
         }
 
@@ -55,6 +59,7 @@
 
         .header p {
             font-size: 14px;
+
             color: #94a3b8;
             font-style: italic;
         }
@@ -74,6 +79,7 @@
             padding: 8px 12px;
             font-size: 16px;
             font-weight: 600;
+
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 20px;
@@ -93,6 +99,7 @@
         }
 
         .grid-4 {
+
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 12px;
@@ -111,6 +118,7 @@
         .form-group.span-4 {
             grid-column: span 4;
         }
+
 
         label {
             font-size: 14px;
@@ -131,6 +139,7 @@
             font-size: 14px;
             color: var(--text-main);
             background-color: #fff;
+
             transition: border-color 0.2s;
         }
 
@@ -150,6 +159,7 @@
 
         .checkbox-label {
             display: flex;
+
             align-items: center;
             font-size: 14px;
             font-weight: 500;
@@ -169,6 +179,7 @@
         }
 
         /* File Upload Styling */
+
         .upload-zone {
             border: 2px dashed var(--border);
             padding: 24px;
@@ -188,6 +199,7 @@
         .upload-zone input[type="file"] {
             position: absolute;
             top: 0;
+
             left: 0;
             width: 100%;
             height: 100%;
@@ -207,6 +219,7 @@
         }
 
         .file-info {
+
             margin-top: 8px;
             font-size: 13px;
             color: var(--accent-color);
@@ -226,6 +239,7 @@
         canvas#signaturePad {
             display: block;
             width: 100%;
+
             height: 150px;
             cursor: crosshair;
             touch-action: none;
@@ -245,6 +259,7 @@
             background-color: #e2e8f0;
             color: var(--text-main);
             font-weight: 500;
+
         }
 
         .btn-clear:hover {
@@ -264,6 +279,7 @@
             padding: 12px 24px;
             font-size: 16px;
             font-weight: 600;
+
             border-radius: 4px;
             cursor: pointer;
             border: none;
@@ -284,6 +300,7 @@
             color: white;
         }
 
+
         .btn-print:hover {
             background-color: #475569;
         }
@@ -303,6 +320,7 @@
             border-radius: 6px;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             z-index: 1000;
+
             font-weight: 600;
             color: white;
         }
@@ -322,6 +340,7 @@
             .form-group.full-width, .form-group.span-4 {
                 grid-column: span 1;
             }
+
             body {
                 padding: 10px;
             }
@@ -341,6 +360,7 @@
             <!-- Hidden input configuration telling Formspree to automatically offer confirmation emails to actors -->
             <input type="hidden" name="_subject" value="New Talent Intake Submission Received">
             
+
             <div class="header">
                 <h1>Talent Agency - New Client Intake Form</h1>
                 <p>Please fill out this form accurately. This information helps us submit you for the right roles.</p>
@@ -356,30 +376,31 @@
                     </div>
                     <div class="form-group">
                         <label for="legalName">Legal Name (for contracts)</label>
-                        <input type="text" id="legalName" name="Legal Name" required>
+                        <input type="text" id="legalName" name="Legal Name">
                     </div>
                     <div class="form-group">
-                        <label for="dob">Date of Birth (MM/DD/YYYY)</label>
-                        <input type="text" id="dob" name="Date of Birth" placeholder="MM/DD/YYYY" required pattern="(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/[0-9]{4}" title="Please enter a valid date in MM/DD/YYYY format">
+                        <label for="dob">Date of Birth</label>
+
+                        <input type="text" id="dob" name="Date of Birth" placeholder="MM/DD/YYYY">
                     </div>
                     <div class="form-group">
-                        <label for="phone">Phone Number (e.g., 123-456-7890)</label>
-                        <input type="tel" id="phone" name="Phone Number" placeholder="123-456-7890" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="Please enter a 10-digit phone number using the format: 123-456-7890">
+                        <label for="phone">Phone Number</label>
+                        <input type="text" id="phone" name="Phone Number">
                     </div>
                     <div class="form-group full-width">
                         <label for="email">Email Address</label>
-                        <!-- Formspree natively scans name="_replyto" or name="email" to target its automatic client auto-responders -->
-                        <input type="email" id="email" name="_replyto" placeholder="actor-email@domain.com" required>
+                        <input type="email" id="email" name="_replyto" placeholder="actor-email@domain.com">
                     </div>
                     <div class="form-group full-width">
                         <label for="address">Current Home Address</label>
-                        <input type="text" id="address" name="Current Home Address" required>
+                        <input type="text" id="address" name="Current Home Address">
                     </div>
                 </div>
 
                 <!-- Emergency Contact Block inside Section 1 -->
                 <div class="grid-3" style="margin-top: 16px; padding-top: 16px; border-top: 1px dashed var(--border);">
                     <div class="form-group">
+
                         <label for="emergencyName">Emergency Contact Name</label>
                         <input type="text" id="emergencyName" name="Emergency Contact Name">
                     </div>
@@ -389,7 +410,7 @@
                     </div>
                     <div class="form-group">
                         <label for="emergencyPhone">Emergency Phone</label>
-                        <input type="tel" id="emergencyPhone" name="Emergency Phone" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="Please enter a 10-digit phone number using the format: 123-456-7890">
+                        <input type="text" id="emergencyPhone" name="Emergency Phone">
                     </div>
                 </div>
             </div>
@@ -399,6 +420,7 @@
                 <div class="section-title">2. Professional & Union Status</div>
                 <div class="form-group">
                     <label>Union Memberships</label>
+
                     <div class="checkbox-group">
                         <label class="checkbox-label">
                             <input type="checkbox" name="Union Memberships[]" value="SAG-AFTRA" onchange="toggleUnionId('sagId', this)"> SAG-AFTRA
@@ -418,7 +440,8 @@
                         <input type="text" id="sagId" name="SAG-AFTRA ID" disabled placeholder="Check box to enable">
                     </div>
                     <div class="form-group">
-                        <label fragile for="aeaId">AEA ID #</label>
+
+                        <label for="aeaId">AEA ID #</label>
                         <input type="text" id="aeaId" name="AEA ID" disabled placeholder="Check box to enable">
                     </div>
                     <div class="form-group">
@@ -437,6 +460,7 @@
 
             <!-- 3. PHYSICAL ATTRIBUTES & SIZES -->
             <div class="section">
+
                 <div class="section-title">3. Physical Attributes & Sizes</div>
                 <div class="grid-4">
                     <div class="form-group">
@@ -456,6 +480,7 @@
                         <input type="text" id="hairLength" name="Hair Length">
                     </div>
                     <div class="form-group">
+
                         <label for="shirtSize">Shirt/Top Size</label>
                         <input type="text" id="shirtSize" name="Shirt/Top Size">
                     </div>
@@ -475,6 +500,7 @@
                         <label for="tattoos">Visible Tattoos / Piercings</label>
                         <input type="text" id="tattoos" name="Visible Tattoos or Piercings" placeholder="Describe locations and sizes if applicable">
                     </div>
+
                 </div>
             </div>
 
@@ -494,6 +520,7 @@
                         <div class="checkbox-group">
                             <label class="checkbox-label"><input type="radio" name="Owns Reliable Vehicle" value="Yes"> Yes</label>
                             <label class="checkbox-label"><input type="radio" name="Owns Reliable Vehicle" value="No"> No</label>
+
                         </div>
                     </div>
                     <div class="form-group full-width">
@@ -513,6 +540,7 @@
                 <div class="form-group">
                     <label for="accents">Accents / Dialects</label>
                     <input type="text" id="accents" name="Accents and Dialects">
+
                 </div>
                 <div class="form-group">
                     <label for="languages">Languages Spoken & Fluency</label>
@@ -531,6 +559,7 @@
                     <textarea id="restrictions" name="Work Restrictions and Boundaries"></textarea>
                 </div>
             </div>
+
 
             <!-- 6. FILE ATTACHMENTS -->
             <div class="section">
@@ -551,6 +580,7 @@
                             <span class="upload-icon">📄</span>
                             <span class="upload-text">Drag & drop resume here or click to choose file</span>
                             <input type="file" id="resumeFile" name="Attached Resume File" accept="application/pdf" onchange="handleFileChange(this, 'resumeInfo')">
+
                             <div class="file-info" id="resumeInfo"></div>
                         </div>
                     </div>
@@ -570,6 +600,7 @@
                         <input type="text" id="portfolio" name="Online Portfolio Link">
                     </div>
                     <div class="form-group">
+
                         <label for="imdb">IMDb Profile Link</label>
                         <input type="text" id="imdb" name="IMDb Profile Link">
                     </div>
@@ -589,6 +620,7 @@
                 <div class="section-title">8. Authorization & Digital Signature</div>
                 <div class="form-group">
                     <label>Please sign inside the canvas box below to confirm your talent application details:</label>
+
                     <div class="signature-container">
                         <canvas id="signaturePad"></canvas>
                         <div class="signature-actions">
@@ -607,6 +639,7 @@
 
         </form>
     </div>
+
 
     <script>
         // Setup Drag and Drop styling events
@@ -627,6 +660,7 @@
             });
         });
 
+
         function handleFileChange(input, infoId) {
             const infoDiv = document.getElementById(infoId);
             if (input.files && input.files.length > 0) {
@@ -646,6 +680,7 @@
                 inputField.placeholder = "Enter ID Number";
                 inputField.focus();
             } else {
+
                 inputField.disabled = true;
                 inputField.value = "";
                 inputField.placeholder = "Check box to enable";
@@ -665,6 +700,7 @@
             ctx.strokeStyle = '#0f172a';
             ctx.lineWidth = 2;
             ctx.lineCap = 'round';
+
         }
 
         window.addEventListener('load', resizeCanvas);
@@ -684,6 +720,7 @@
             const pos = getMousePos(e);
             ctx.beginPath();
             ctx.moveTo(pos.x, pos.y);
+
             e.preventDefault();
         }
 
@@ -702,6 +739,7 @@
         canvas.addEventListener('mousedown', startDrawing);
         canvas.addEventListener('mousemove', draw);
         window.addEventListener('mouseup', stopDrawing);
+
 
         canvas.addEventListener('touchstart', startDrawing);
         canvas.addEventListener('touchmove', draw);
@@ -722,6 +760,7 @@
             
             // Map the current visual sketch signature to data text inside the hidden input before delivery
             if (signatureInteracted) {
+
                 document.getElementById('signatureData').value = canvas.toDataURL();
             }
 
@@ -741,6 +780,7 @@
                     msgBox.style.display = 'block';
                     form.reset();
                     clearSignature();
+
                 } else {
                     response.json().then(data => {
                         if (Object.prototype.hasOwnProperty.call(data, 'errors')) {
@@ -760,6 +800,7 @@
             })
             .finally(() => {
                 setTimeout(() => {
+
                     msgBox.style.display = 'none';
                 }, 5000);
             });
@@ -767,3 +808,5 @@
     </script>
 </body>
 </html>
+
+
