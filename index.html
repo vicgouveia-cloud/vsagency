@@ -308,31 +308,19 @@
         button:active {
             transform: scale(0.98);
         }
-
-        @media (max-width: 600px) {
-            .grid-2, .grid-3, .grid-4 {
-                grid-template-columns: 1fr;
-            }
-            .form-group.full-width, .form-group.span-4 {
-                grid-column: span 1;
-            }
-            body {
-                padding: 10px;
-            }
-        }
-
     </style>
 </head>
 <body>
 
     <div class="form-container">
-        <!-- Secure traditional clean HTML submission to Formspree email gateway -->
+        <!-- Pure standard HTML form submission containing zero background fetch intercepts -->
         <form id="intakeForm" action="https://formspree.io" method="POST" enctype="multipart/form-data" onsubmit="prepareSignatureSubmit()">
             
             <input type="hidden" name="_subject" value="New Talent Intake Submission Received">
             
             <div class="header">
                 <h1>Talent Agency - New Client Intake Form</h1>
+
                 <p>Please fill out this form accurately. This information helps us submit you for the right roles.</p>
             </div>
 
@@ -340,7 +328,6 @@
             <div class="section">
                 <div class="section-title">1. General Information</div>
                 <div class="grid-2">
-
                     <div class="form-group">
                         <label for="stageName">Stage Name</label>
                         <input type="text" id="stageName" name="Stage Name" placeholder="e.g., Jane Doe">
@@ -353,6 +340,7 @@
                         <label for="dob">Date of Birth</label>
                         <input type="text" id="dob" name="Date of Birth" placeholder="MM/DD/YYYY">
                     </div>
+
                     <div class="form-group">
                         <label for="phone">Phone Number</label>
                         <input type="text" id="phone" name="Phone Number">
@@ -360,7 +348,6 @@
                     <div class="form-group full-width">
                         <label for="email">Email Address</label>
                         <input type="email" id="email" name="_replyto" placeholder="actor-email@domain.com">
-
                     </div>
                     <div class="form-group full-width">
                         <label for="address">Current Home Address</label>
@@ -373,6 +360,7 @@
                     <div class="form-group">
                         <label for="emergencyName">Emergency Contact Name</label>
                         <input type="text" id="emergencyName" name="Emergency Contact Name">
+
                     </div>
                     <div class="form-group">
                         <label for="emergencyRelationship">Relationship</label>
@@ -380,7 +368,6 @@
                     </div>
                     <div class="form-group">
                         <label for="emergencyPhone">Emergency Phone</label>
-
                         <input type="text" id="emergencyPhone" name="Emergency Phone">
                     </div>
                 </div>
@@ -393,6 +380,7 @@
                     <label>Union Memberships</label>
                     <div class="checkbox-group">
                         <label class="checkbox-label">
+
                             <input type="checkbox" name="Union Memberships[]" value="SAG-AFTRA" onchange="toggleUnionId('sagId', this)"> SAG-AFTRA
                         </label>
                         <label class="checkbox-label">
@@ -400,7 +388,6 @@
                         </label>
                         <label class="checkbox-label">
                             <input type="checkbox" name="Union Memberships[]" value="Non-Union"> Non-Union
-
                         </label>
                     </div>
                 </div>
@@ -413,6 +400,7 @@
                     <div class="form-group">
                         <label for="aeaId">AEA ID #</label>
                         <input type="text" id="aeaId" name="AEA ID" disabled placeholder="Check box to enable">
+
                     </div>
                     <div class="form-group">
                         <label>Valid Passport?</label>
@@ -420,7 +408,6 @@
                             <label class="checkbox-label"><input type="radio" name="Has Valid Passport" value="Yes"> Yes</label>
                             <label class="checkbox-label"><input type="radio" name="Has Valid Passport" value="No"> No</label>
                         </div>
-
                     </div>
                     <div class="form-group">
                         <label for="citizenship">Citizenship / Work Authorization</label>
@@ -433,6 +420,7 @@
             <div class="section">
                 <div class="section-title">3. Physical Attributes & Sizes</div>
                 <div class="grid-4">
+
                     <div class="form-group">
                         <label for="height">Height</label>
                         <input type="text" id="height" name="Height">
@@ -440,7 +428,6 @@
                     <div class="form-group">
                         <label for="eyeColor">Eye Color</label>
                         <input type="text" id="eyeColor" name="Eye Color">
-
                     </div>
                     <div class="form-group">
                         <label for="hairColor">Hair Color</label>
@@ -453,6 +440,7 @@
                     <div class="form-group">
                         <label for="shirtSize">Shirt/Top Size</label>
                         <input type="text" id="shirtSize" name="Shirt/Top Size">
+
                     </div>
                     <div class="form-group">
                         <label for="pantSize">Pant/Bottom Size</label>
@@ -460,7 +448,6 @@
                     </div>
                     <div class="form-group">
                         <label for="dressSize">Dress Size</label>
-
                         <input type="text" id="dressSize" name="Dress Size">
                     </div>
                     <div class="form-group">
@@ -474,13 +461,13 @@
                 </div>
             </div>
 
+
             <!-- 4. AVAILABILITY & TRAVEL -->
             <div class="section">
                 <div class="section-title">4. Availability & Travel</div>
                 <div class="grid-2">
                     <div class="form-group">
                         <label>Willing to travel for work?</label>
-
                         <div class="checkbox-group">
                             <label class="checkbox-label"><input type="radio" name="Willing to Travel" value="Yes"> Yes</label>
                             <label class="checkbox-label"><input type="radio" name="Willing to Travel" value="No"> No</label>
@@ -494,13 +481,13 @@
                         </div>
                     </div>
                     <div class="form-group full-width">
+
                         <label for="lodging">Local lodging options in other cities?</label>
                         <input type="text" id="lodging" name="Local Lodging in Other Cities" placeholder="e.g., Los Angeles, Atlanta, New York">
                     </div>
                     <div class="form-group full-width">
                         <label for="conflicts">Schedule conflicts / Blackout dates</label>
                         <input type="text" id="conflicts" name="Schedule Conflicts / Blackout Dates">
-
                     </div>
                 </div>
             </div>
@@ -514,13 +501,13 @@
                 </div>
                 <div class="form-group">
                     <label for="languages">Languages Spoken & Fluency</label>
+
                     <input type="text" id="languages" name="Languages Spoken & Fluency">
                 </div>
                 <div class="form-group">
                     <label for="performanceSkills">Performance Skills (Sing/Dance/Combat)</label>
                     <textarea id="performanceSkills" name="Performance Skills"></textarea>
                 </div>
-
                 <div class="form-group">
                     <label for="athleticSkills">Athletic Skills (Sports/Stunts)</label>
                     <textarea id="athleticSkills" name="Athletic Skills"></textarea>
@@ -534,13 +521,13 @@
             <!-- 6. FILE ATTACHMENTS -->
             <div class="section">
                 <div class="section-title">6. File Attachments</div>
+
                 <div class="grid-2">
                     <div class="form-group">
                         <label>Current Headshot (JPG or PNG)</label>
                         <div class="upload-zone" id="headshotZone">
                             <span class="upload-icon">📷</span>
                             <span class="upload-text">Drag & drop headshot here or click to choose file</span>
-
                             <input type="file" id="headshotFile" name="Attached Headshot File" accept="image/jpeg, image/png" onchange="handleFileChange(this, 'headshotInfo')">
                             <div class="file-info" id="headshotInfo"></div>
                         </div>
@@ -554,13 +541,13 @@
                             <div class="file-info" id="resumeInfo"></div>
                         </div>
                     </div>
+
                 </div>
             </div>
 
             <!-- 7. LINKS & MATERIALS -->
             <div class="section">
                 <div class="section-title">7. Links & Materials</div>
-
                 <div class="grid-2">
                     <div class="form-group">
                         <label for="reel">Link to Acting Reel</label>
@@ -574,13 +561,13 @@
                         <label for="imdb">IMDb Profile Link</label>
                         <input type="text" id="imdb" name="IMDb Profile Link">
                     </div>
+
                     <div class="form-group">
                         <label for="instagram">Instagram Handle</label>
                         <input type="text" id="instagram" name="Instagram Handle" placeholder="@username">
                     </div>
                     <div class="form-group full-width">
                         <label for="socialOther">Other Social Platforms (TikTok, YouTube, etc.)</label>
-
                         <input type="text" id="socialOther" name="Other Social Profiles">
                     </div>
                 </div>
@@ -594,13 +581,13 @@
                     <div class="signature-container">
                         <canvas id="signaturePad"></canvas>
                         <div class="signature-actions">
+
                             <button type="button" class="btn-clear" onclick="clearSignature()">Clear Signature</button>
                         </div>
                     </div>
                     <input type="hidden" id="signatureData" name="Digital Signature Image Data">
                 </div>
             </div>
-
 
             <div class="actions">
                 <button type="submit" class="btn-submit">Submit Form Data</button>
@@ -614,6 +601,7 @@
         // Setup Drag and Drop styling events
         ['headshotZone', 'resumeZone'].forEach(id => {
             const zone = document.getElementById(id);
+
             
             zone.addEventListener('dragover', (e) => {
                 e.preventDefault();
@@ -621,7 +609,6 @@
             });
 
             zone.addEventListener('dragleave', () => {
-
                 zone.classList.remove('dragover');
             });
 
@@ -634,6 +621,7 @@
             const infoDiv = document.getElementById(infoId);
             if (input.files && input.files.length > 0) {
                 const file = input.files[0];
+
                 infoDiv.textContent = `Selected: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
                 infoDiv.style.display = 'block';
             } else {
@@ -641,7 +629,6 @@
                 infoDiv.textContent = '';
             }
         }
-
 
         function toggleUnionId(id, checkbox) {
             const inputField = document.getElementById(id);
@@ -654,6 +641,7 @@
                 inputField.value = "";
                 inputField.placeholder = "Check box to enable";
             }
+
         }
 
         // Signature Canvas Logic
@@ -661,7 +649,6 @@
         const ctx = canvas.getContext('2d');
         let isDrawing = false;
         let signatureInteracted = false;
-
 
         function resizeCanvas() {
             const rect = canvas.getBoundingClientRect();
@@ -675,6 +662,7 @@
         window.addEventListener('load', resizeCanvas);
         window.addEventListener('resize', resizeCanvas);
 
+
         function getMousePos(e) {
             const rect = canvas.getBoundingClientRect();
             return {
@@ -682,7 +670,6 @@
                 y: (e.clientY || e.touches[0].clientY) - rect.top
             };
         }
-
 
         function startDrawing(e) {
             isDrawing = true;
@@ -695,6 +682,7 @@
 
         function draw(e) {
             if (!isDrawing) return;
+
             const pos = getMousePos(e);
             ctx.lineTo(pos.x, pos.y);
             ctx.stroke();
@@ -703,7 +691,6 @@
 
         function stopDrawing() {
             isDrawing = false;
-
         }
 
         canvas.addEventListener('mousedown', startDrawing);
@@ -715,15 +702,15 @@
         window.addEventListener('touchend', stopDrawing);
 
         function clearSignature() {
+
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             signatureInteracted = false;
             document.getElementById('signatureData').value = "";
         }
 
-        // This function prepares the signature base64 drawing string right before native layout dispatch
+        // Convert signature canvas to text data before native form navigation
         function prepareSignatureSubmit() {
             if (signatureInteracted) {
-
                 document.getElementById('signatureData').value = canvas.toDataURL();
             }
         }
